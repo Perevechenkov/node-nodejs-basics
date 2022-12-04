@@ -16,7 +16,11 @@ const compress = async () => {
     const dest = createWriteStream(destFilePath);
     const gzip = createGzip();
 
-    await pipe(src, gzip, dest);
+    try {
+        await pipe(src, gzip, dest);
+    } catch (err) {
+        console.log(err.message);
+    }
 };
 
 await compress();
