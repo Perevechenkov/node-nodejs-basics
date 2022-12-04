@@ -1,11 +1,11 @@
 import path from 'node:path';
 import { release, version } from 'node:os';
-import { fileURLToPath } from 'node:url';
 import { createServer as createServerHttp } from 'node:http';
 import './files/c.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import getDir from '../getDir.js';
+
+const { __dirname, __filename } = getDir(import.meta.url);
 
 const random = Math.random();
 

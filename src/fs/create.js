@@ -1,9 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import getDir from '../getDir.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __dirname } = getDir(import.meta.url);
 
 const create = async () => {
     const filePath = path.join(__dirname, 'files', 'fresh.txt');
