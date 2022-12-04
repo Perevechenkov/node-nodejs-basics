@@ -17,7 +17,11 @@ const transform = async () => {
         process.exit();
     });
 
-    await pipe(process.stdin, myTransform, process.stdout);
+    try {
+        await pipe(process.stdin, myTransform, process.stdout);
+    } catch (err) {
+        console.log(err.message);
+    }
 };
 
 await transform();
