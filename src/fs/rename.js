@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import getDir from '../getDir.js';
@@ -10,7 +9,7 @@ const rename = async () => {
     const newFilePath = path.join(__dirname, 'files', 'properFilename.md');
 
     try {
-        if (existsSync(newFilePath)) throw { code: 'EEXIST', message: `${newFilePath} already exists` };
+        if (await fs.stat(newFilePath)) throw { code: 'EEXIST', message: `${newFilePath} already exists` };;
         await fs.rename(targetFilePath, newFilePath);
     } catch (err) {
         console.log(err.message);
