@@ -1,9 +1,12 @@
 const parseEnv = () => {
+    const formattedVars = [];
     for (const variable in process.env) {
         if (/^RSS_/.test(variable)) {
-            console.log(`${variable}=${process.env[variable]}`);
+            formattedVars.push(`${variable}=${process.env[variable]}`);
         }
     }
+
+    console.log(formattedVars.join('; '))
 };
 
 parseEnv();
