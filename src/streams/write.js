@@ -1,5 +1,28 @@
+import { createWriteStream } from 'node:fs';
+import path from 'node:path';
+import getDir from '../getDir.js';
+
+const { __dirname } = getDir(import.meta.url);
+
 const write = async () => {
-    // Write your code here 
+    const targetFilePath = path.join(__dirname, 'files', 'fileToWrite.txt');
+
+    const ws = createWriteStream(targetFilePath);
+
+    ws.on('error', err => {
+        console.log(err);
+        process.exit();
+    });
+
+    ws.on('finish', () => {
+        console.log('Finished');
+        process.exit();
+    });
+
+    process.stdin.on('data', data => {
+        ws.write(data);
+        ws.end();
+    });
 };
 
 await write();
